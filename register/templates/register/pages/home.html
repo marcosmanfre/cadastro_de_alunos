@@ -1,19 +1,51 @@
 {% include 'register/partials/head.html' %}
 
-<body>
-    <header class="main-header-container">
-        <div class="main-header container">
-            <h1>
-                <a href="/">
-                    <i class="fas fa-address-book"></i>
-                    <span>Cadastro de alunos</span>
-                </a>
-            </h1>
-        </div>
-    </header>
-</body>
 
-{% include 'register/partials/footer.html' %}
-</body>
+{% block content%}
 
-</html>
+{% if alunos %}
+
+<h3 class="m-4">Lista de Alunos</h3>
+<div class="row">
+  <div class="col-12">
+
+<div class="card bg-light ms-4 me-4 mb-4">
+    <div class="card-header">
+      <i class="fa-solid fa-list fa-lg"></i> Alunos cadastrados
+    </div>
+    <div class="card-body">
+      <p class="card-text">
+     
+
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Número do Registro</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Sobrenome</th>
+            <th scope="col">Seção</th>
+            <th scope="col">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for aluno in alunos %}
+            <tr>
+                <td>{{ aluno.registro_aluno }}</td>
+                <td>{{ aluno.nome }}</td>
+                <td>{{ aluno.sobrenome }}</td>
+                <td>{{ aluno.secao }}</td>
+                <td></td>
+            </tr>      
+          {% endfor %}
+        </tbody>
+      </table>
+</div>
+
+{% else %}
+<h5 class="alert alert-primary ms-4 me-4">Não contém aluno cadastrado </h5>
+{% endif %}
+
+
+{% endblock %}
+
