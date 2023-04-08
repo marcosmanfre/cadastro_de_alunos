@@ -30,3 +30,10 @@ def adicionar(request):
         )
         alunos.save()
         return redirect('register')
+
+def editar(request):
+    alunos = Aluno.objects.all()
+
+    context = {
+        'alunos': alunos,
+    }
