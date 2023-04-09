@@ -14,13 +14,11 @@ def home(request):
 
 def adicionar(request):
     if request.method == "POST":
-        registro_aluno = request.POST.get('registro_aluno')
         nome = request.POST.get('nome')
         sobrenome = request.POST.get('sobrenome')
         secao = request.POST.get('secao')
 
         alunos = Aluno(
-            registro_aluno=registro_aluno,
             nome=nome,
             sobrenome=sobrenome,
             secao=secao
@@ -41,17 +39,15 @@ def editar(request):
 
 def salvar(request, id):
     if request.method == "POST":
-        registro_aluno = request.POST.get('registro_aluno')
         nome = request.POST.get('nome')
         sobrenome = request.POST.get('sobrenome')
         secao = request.POST.get('secao')
 
         alunos = Aluno(
             id=id,
-            registro_aluno=registro_aluno,
             nome=nome,
             sobrenome=sobrenome,
-            secao=secao
+            secao=secao,
 
         )
         alunos.save()
