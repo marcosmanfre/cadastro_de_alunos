@@ -1,7 +1,5 @@
 from django.shortcuts import redirect, render
-
 from register.models import Aluno
-
 from .models import Aluno
 
 
@@ -11,7 +9,7 @@ def home(request):
     context = {
         'alunos': alunos,
     }
-    return render(request, 'register/pages/home.html', context)
+    return render(request, 'home.html', context)
 
 
 def adicionar(request):
@@ -29,7 +27,8 @@ def adicionar(request):
 
         )
         alunos.save()
-        return redirect('register')
+        return redirect('home')
+
 
 def editar(request):
     alunos = Aluno.objects.all()
@@ -37,3 +36,34 @@ def editar(request):
     context = {
         'alunos': alunos,
     }
+    return redirect(request, 'home.html', context)
+
+
+def salvar(request, id):
+    if request.method == "POST":
+        registro_aluno = request.POST.get('registro_aluno')
+        nome = request.POST.get('nome')
+        sobrenome = request.POST.get('sobrenome')
+        secao = request.POST.get('secao')
+
+        alunos = Aluno(
+            id=id,
+            registro_aluno=registro_aluno,
+            nome=nome,
+            sobrenome=sobrenome,
+            secao=secao
+
+        )
+        alunos.save()
+        return redirect('home')
+
+    return redirect(request, 'home.html')
+
+
+def deletar(request, id):
+    alunos = Aluno.objects.filter(id=id)
+    alunos.delete()
+    context = {
+        'alunos': alunos,
+    }
+    return redirect('home')
